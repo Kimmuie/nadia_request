@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f3e9" />
+  <title>Nadia Proposal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="app">
+    <!-- ================================
+         SCENE 1 — PARACHUTE / PACKAGE
+         ================================ -->
+    <section id="scene-one" class="scene scene-one" aria-label="The proposal package">
+      <div class="doodle-stars" aria-hidden="true">
+        <span class="star s1">✦</span><span class="star s2">✧</span>
+        <span class="star s3">✦</span><span class="star s4">✧</span>
+        <span class="star s5">✦</span>
+      </div>
+
+      <div id="falling-package" class="falling-package">
+        <div class="parachute-wrap">
+          <div class="parachute">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="ropes"><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <button id="package" class="package" aria-label="Open the package">
+          <img src="assets/package.png" alt="A package" class="package-image" />
+          <span class="box-light"></span>
+          <span class="box-confetti">✦　✧　♡</span>
+        </button>
+      </div>
+
+      <div id="nadia-title" class="nadia-title" aria-live="polite">
+        <div class="nadia-letters" aria-label="Nadia">
+          <img src="assets/nadia-n.png" alt="N" class="zine-letter letter-n" />
+          <img src="assets/nadia-a-1.png" alt="a" class="zine-letter letter-a1" />
+          <img src="assets/nadia-d.png" alt="d" class="zine-letter letter-d" />
+          <img src="assets/nadia-i.png" alt="i" class="zine-letter letter-i" />
+          <img src="assets/nadia-a-2.png" alt="a" class="zine-letter letter-a2" />
+        </div>
+        <img src="assets/nadia-request.png" alt="Proposal" class="proposal-image" />
+      </div>
+
+      <div id="package-flash" class="package-flash" aria-hidden="true"></div>
+    </section>
+
+    <!-- ================================
+         SCENE 2 — ZINE STORY
+         ================================ -->
+    <section id="scene-two" class="scene scene-two" aria-label="A little story">
+      <div class="paper-grain" aria-hidden="true"></div>
+
+      <header class="zine-header">
+        <span>NO. 01</span>
+        <span>for Nadia ♡</span>
+        <span>2026</span>
+      </header>
+
+      <div class="story">
+        <article class="story-card card-one">
+          <img
+            src="assets/emptyImage.png"
+            alt="Story illustration"
+            class="story-image image-window"
+          />
+          <p>
+            Some moments arrive quietly. You don't know they will matter until
+            you look back and realize they stayed.
+          </p>
+          <div class="scribble-line"></div>
+        </article>
+
+        <article class="story-card card-two">
+          <div class="tape"></div>
+          <img
+            src="assets/emptyImage.png"
+            alt="Story illustration"
+            class="story-image doodle-image"
+          />
+          <p>
+            Maybe it's the tiny conversations, the stupid jokes, or the ordinary
+            days that somehow become the ones worth keeping.
+          </p>
+        </article>
+
+        <article class="story-card card-three">
+          <div class="quote">“I think I found<br />one of those moments.”</div>
+          <div class="tiny-stars">✦　✧　✦</div>
+          <img
+            src="assets/emptyImage.png"
+            alt="Story illustration"
+            class="story-image story-image-small"
+          />
+          <p>
+            So I made this little place for one question. It took a parachute,
+            a box, a candle, and a slightly ridiculous amount of courage.
+          </p>
+        </article>
+      </div>
+
+      <section class="candle-section" id="candle-section">
+        <div class="candle-copy">
+          <span class="small-note">there's one more thing...</span>
+          <img src="assets/hold-this.png" alt="Hold this" class="hold-this-image" />
+          <p>Take the little light and look around.</p>
+        </div>
+
+        <div id="candle-stage" class="candle-stage">
+          <div
+            id="candle"
+            class="candle"
+            role="button"
+            tabindex="0"
+            aria-label="Hold and drag the candle"
+          >
+            <div class="flame"><i></i></div>
+            <div class="wax">
+              <span class="wick"></span>
+              <span class="wax-drip d1"></span>
+              <span class="wax-drip d2"></span>
+            </div>
+            <div class="wax-shadow"></div>
+          </div>
+
+          <div class="drag-hint">press + drag</div>
+        </div>
+      </section>
+
+      <!-- Darkness overlay lives inside scene 2 so the story remains underneath it. -->
+      <div id="darkness" class="darkness" aria-hidden="true">
+        <div id="hidden-world" class="hidden-world">
+          <span class="clue clue-one">keep looking...</span>
+          <span class="clue clue-two">almost ♡</span>
+          <span class="clue clue-three">a little farther</span>
+
+          <div id="proposal-message" class="proposal-message">
+            <span>Nadia,</span>
+            <span>I have something</span>
+            <span>I've wanted to ask...</span>
+            <strong>Will you be my girlfriend?</strong>
+            <small>♡</small>
+          </div>
+        </div>
+
+        <div id="spotlight" class="spotlight"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
