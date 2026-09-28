@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&display=swap");
 
 :root {
   --paper: #f7f3e9;
   --ink: #171717;
   --muted: #6c675d;
   --warm: #fff2b8;
-  --light: 185px;
+  --light: 100px;
 }
 
 * {
@@ -23,7 +24,7 @@ body {
     url("assets/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: "Caveat", "Comic Sans MS", "Trebuchet MS", cursive;
+  font-family: "Charmonman", "Comic Sans MS", "Trebuchet MS", cursive;
   overflow-x: hidden;
 }
 
@@ -533,117 +534,49 @@ button {
 }
 
 .candle-stage {
-  position: relative;
+  position: static;
   width: 100%;
-  height: 470px;
+  height: 0;
 }
 
 .candle {
-  position: absolute;
+  position: fixed;
   left: 50%;
-  top: 52%;
-  width: 80px;
-  height: 180px;
+  top: 80%;
+  /* No fixed width/height: it sizes to candle.gif, so translate(-50%, -50%)
+     puts the candle's true center at the center of the screen. */
+  width: fit-content;
+  line-height: 0;
   transform: translate(-50%, -50%);
   cursor: grab;
   touch-action: none;
   user-select: none;
-  z-index: 10;
+  z-index: 70;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+
+.candle.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .candle:active {
   cursor: grabbing;
 }
 
-body.candle-active #candle {
+.candle-image {
+  display: block;
+  width: 200px;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
   z-index: 70;
 }
 
-.wax {
-  position: absolute;
-  bottom: 20px;
-  left: 17px;
-  width: 46px;
-  height: 125px;
-  background: #f3ead5;
-  border: 3px solid var(--ink);
-  border-radius: 9px 9px 4px 4px;
-  box-shadow: 4px 5px 0 var(--ink);
-}
-
-.wax:before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: 4px;
-  width: 32px;
-  height: 13px;
-  border: 3px solid var(--ink);
-  border-radius: 50%;
-  background: #f3ead5;
-}
-
-.wick {
-  position: absolute;
-  left: 20px;
-  top: -17px;
-  height: 18px;
-  width: 3px;
-  background: var(--ink);
-}
-
-.wax-drip {
-  position: absolute;
-  top: 8px;
-  width: 7px;
-  border: 2px solid var(--ink);
-  border-top: 0;
-  border-radius: 0 0 8px 8px;
-}
-
-.d1 { left: 8px; height: 25px; }
-.d2 { right: 8px; height: 16px; }
-
-.wax-shadow {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 80px;
-  height: 24px;
-  border: 3px solid var(--ink);
-  border-radius: 50%;
-  background: #e4dac7;
-}
-
-.flame {
-  position: absolute;
-  left: 29px;
-  top: 1px;
-  width: 28px;
-  height: 48px;
-  background: #f5c84c;
-  border: 3px solid var(--ink);
-  border-radius: 60% 40% 60% 40%;
-  transform: rotate(5deg);
-  box-shadow: 0 0 30px rgba(255,211,89,.7);
-  animation: flame 1.1s ease-in-out infinite alternate;
-  z-index: 2;
-}
-
-.flame i {
-  position: absolute;
-  left: 8px;
-  top: 15px;
-  width: 10px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-}
-
-@keyframes flame {
-  to {
-    transform: rotate(-5deg) scale(.92,1.06);
-  }
+body.candle-active #candle {
+  z-index: 70;
 }
 
 .drag-hint {
@@ -665,7 +598,14 @@ body.candle-active #candle {
   pointer-events: none;
   opacity: 0;
   transition: opacity .55s ease;
-  background: rgba(7,7,7,.96);
+  /* Transparent circle around the candle = the page shows through normally.
+     Everything outside the circle stays dark. */
+  background: radial-gradient(
+    circle var(--light) at var(--spot-x, 50%) var(--spot-y, 50%),
+    transparent 0%,
+    transparent 90%,
+    #191919 100%
+  );
   overflow: hidden;
 }
 
@@ -673,37 +613,24 @@ body.candle-active #candle {
   opacity: 1;
 }
 
-.spotlight {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      circle var(--light) at var(--spot-x, 50%) var(--spot-y, 50%),
-      rgba(255,245,193,.98) 0%,
-      rgba(255,230,135,.55) 24%,
-      rgba(255,218,112,.16) 48%,
-      rgba(0,0,0,.98) 76%
-    );
-  mix-blend-mode: screen;
-}
-
 .hidden-world {
   position: absolute;
   inset: 0;
-  color: #fff6c9;
-  font-family: Georgia, serif;
+  opacity: 1;
+  color: #191919;
+  font-family: "Charmonman", "Comic Sans MS", cursive;
 }
 
 .clue,
 .proposal-message {
   position: absolute;
-  opacity: .96;
-  text-shadow: 0 0 15px rgba(255,222,117,.8);
+  opacity: 1;
+  text-shadow: rgba(7,7,7,.96);
 }
 
 .clue {
   font-size: 16px;
-  font-family: "Caveat", "Comic Sans MS", cursive;
+  font-family: "Charmonman", "Comic Sans MS", cursive;
 }
 
 .clue-one {

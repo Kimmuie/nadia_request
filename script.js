@@ -5,7 +5,6 @@
 const CONFIG = {
   packageFallMs: 2000,
   sceneTransitionMs: 950,
-  candleLightRadius: 185,
   candleMessageRadius: 235,
 };
 
@@ -14,9 +13,8 @@ const nadiaTitle = document.getElementById("nadia-title");
 const packageFlash = document.getElementById("package-flash");
 const sceneTwo = document.getElementById("scene-two");
 const darkness = document.getElementById("darkness");
-const spotlight = document.getElementById("spotlight");
 const candle = document.getElementById("candle");
-const candleStage = document.getElementById("candle-stage");
+const candleSection = document.getElementById("candle-section");
 const proposalMessage = document.getElementById("proposal-message");
 
 let packageOpened = false;
@@ -55,25 +53,36 @@ function openPackage() {
 }
 
 // ------------------------------------------------------------
-// Candle — hold and drag
+// Candle — sits at the center of the screen, hold and drag
 // ------------------------------------------------------------
-function pointerPosition(event) {
-  return { x: event.clientX, y: event.clientY };
-}
+// The candle is position: fixed (see CSS), so it starts at the center of the
+// viewport regardless of how tall the scene is. Once dragged, left/top are
+// viewport pixels and the element keeps translate(-50%, -50%).
+
+// Only show the candle while the candle section is on screen,
+// otherwise it would float over scene one and the story.
+new IntersectionObserver(
+  ([entry]) => {
+    candle.classList.toggle("visible", entry.intersectionRatio >= 0.95);
+  },
+  { threshold: [0, 0.95, 1] }
+).observe(candleSection);
 
 function setSpotlight(x, y) {
   document.documentElement.style.setProperty("--spot-x", `${x}px`);
-  document.documentElement.style.setProperty("--spot-y", `${y}px`);
+  document.documentElement.style.setProperty("--spot-y", `${y - 75}px`);
 }
 
-function setCandlePosition(clientX, clientY) {
-  const rect = candleStage.getBoundingClientRect();
-  const x = Math.max(35, Math.min(rect.width - 35, clientX - rect.left - candleOffset.x));
-  const y = Math.max(45, Math.min(rect.height - 40, clientY - rect.top - candleOffset.y));
+function setCandlePosition(x, y) {
+  const cx = Math.max(0, Math.min(window.innerWidth, x));
+  const cy = Math.max(0, Math.min(window.innerHeight, y));
 
-  candle.style.left = `${x}px`;
-  candle.style.top = `${y}px`;
-  candle.style.transform = "translate(-50%, -50%)";
+  candle.style.left = `${cx}px`;
+  candle.style.top = `${cy}px`;
+
+  // The lit circle follows the candle.
+  setSpotlight(cx, cy);
+  checkProposal(cx, cy);
 }
 
 function startCandle(event) {
@@ -81,6 +90,7 @@ function startCandle(event) {
   candleHeld = true;
   candle.setPointerCapture?.(event.pointerId);
 
+  // Remember where inside the candle it was grabbed, so it doesn't jump.
   const rect = candle.getBoundingClientRect();
   candleOffset.x = event.clientX - (rect.left + rect.width / 2);
   candleOffset.y = event.clientY - (rect.top + rect.height / 2);
@@ -93,9 +103,7 @@ function startCandle(event) {
 function moveCandle(event) {
   if (!candleHeld) return;
   event.preventDefault();
-  setCandlePosition(event.clientX, event.clientY);
-  setSpotlight(event.clientX, event.clientY);
-  checkProposal(event.clientX, event.clientY);
+  setCandlePosition(event.clientX - candleOffset.x, event.clientY - candleOffset.y);
 }
 
 function stopCandle(event) {
@@ -111,18 +119,13 @@ candle.addEventListener("pointermove", moveCandle);
 candle.addEventListener("pointerup", stopCandle);
 candle.addEventListener("pointercancel", stopCandle);
 
-// Keep the flashlight under the pointer even if the user starts over the candle.
-window.addEventListener("pointermove", (event) => {
-  if (candleHeld) setSpotlight(event.clientX, event.clientY);
-});
-
 // Keyboard fallback for accessibility.
 candle.addEventListener("keydown", (event) => {
   const step = 25;
-  const current = candle.getBoundingClientRect();
   if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
   event.preventDefault();
 
+  const current = candle.getBoundingClientRect();
   let x = current.left + current.width / 2;
   let y = current.top + current.height / 2;
   if (event.key === "ArrowUp") y -= step;
@@ -131,8 +134,7 @@ candle.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") x += step;
 
   darkness.classList.add("active");
-  setSpotlight(x, y);
-  checkProposal(x, y);
+  setCandlePosition(x, y);
 });
 
 candle.addEventListener("blur", () => {
@@ -167,12 +169,5 @@ function checkProposal(x, y) {
 }
 
 // The hidden message itself is always underneath the flashlight.
-// It becomes visually readable because the spotlight reveals it.
+// It becomes readable only inside the lit circle.
 proposalMessage.style.opacity = "1";
-
-// ------------------------------------------------------------
-// Optional PNG asset helper
-// ------------------------------------------------------------
-// If you later replace the fallback Nadia letters with PNGs,
-// use this pattern in HTML:
-// <img src="assets/nadia-n.png" alt="N" class="letter-image">
