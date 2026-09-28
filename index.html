@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f7f3e9" />
-  <title>Nadia Proposal</title>
+  <title>Nadia Request</title>
+  <link rel="icon" type="image/png" href="assets/icon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,17 +21,19 @@
       </div>
 
       <div id="falling-package" class="falling-package">
-        <div class="parachute-wrap">
-          <div class="parachute">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <div class="ropes"><i></i><i></i><i></i><i></i></div>
-        </div>
-
         <button id="package" class="package" aria-label="Open the package">
-          <img src="assets/package.png" alt="A package" class="package-image" />
-          <span class="box-light"></span>
-          <span class="box-confetti">✦　✧　♡</span>
+          <div class="parachute-wrap">
+            <img src="assets/parachute.png" alt="" class="parachute-image" aria-hidden="true" />
+          </div>
+          <span class="box-light" aria-hidden="true"></span>
+          <img src="assets/emptyImage.png" class="box-confetti" aria-hidden="true" />
+          <img src="assets/emptyImage.png" class="box-confetti" aria-hidden="true" />
+          <img src="assets/emptyImage.png" class="box-confetti" aria-hidden="true" />
+          <div class="package-visual">
+            <img src="assets/package.png" alt="A package" class="package-image package-image-closed" />
+            <img src="assets/package_open.png" alt="" class="package-image package-image-open" aria-hidden="true" />
+
+          </div>
         </button>
       </div>
 
@@ -55,9 +58,8 @@
       <div class="paper-grain" aria-hidden="true"></div>
 
       <header class="zine-header">
-        <span>NO. 01</span>
-        <span>for Nadia ♡</span>
-        <span>2026</span>
+        <span>To Nadia</span>
+        <span>From Kim</span>
       </header>
 
       <div class="story">
@@ -88,8 +90,6 @@
         </article>
 
         <article class="story-card card-three">
-          <div class="quote">“I think I found<br />one of those moments.”</div>
-          <div class="tiny-stars">✦　✧　✦</div>
           <img
             src="assets/emptyImage.png"
             alt="Story illustration"
@@ -104,9 +104,7 @@
 
       <section class="candle-section" id="candle-section">
         <div class="candle-copy">
-          <span class="small-note">there's one more thing...</span>
           <img src="assets/hold-this.png" alt="Hold this" class="hold-this-image" />
-          <p>Take the little light and look around.</p>
         </div>
 
         <div id="candle-stage" class="candle-stage">
@@ -125,24 +123,15 @@
             </div>
             <div class="wax-shadow"></div>
           </div>
-
-          <div class="drag-hint">press + drag</div>
         </div>
       </section>
 
       <!-- Darkness overlay lives inside scene 2 so the story remains underneath it. -->
       <div id="darkness" class="darkness" aria-hidden="true">
         <div id="hidden-world" class="hidden-world">
-          <span class="clue clue-one">keep looking...</span>
-          <span class="clue clue-two">almost ♡</span>
-          <span class="clue clue-three">a little farther</span>
 
           <div id="proposal-message" class="proposal-message">
-            <span>Nadia,</span>
-            <span>I have something</span>
-            <span>I've wanted to ask...</span>
-            <strong>Will you be my girlfriend?</strong>
-            <small>♡</small>
+            <strong>ได้เวลาเลื่อนขั้นสถานะแล้วม่ะ</strong>
           </div>
         </div>
 

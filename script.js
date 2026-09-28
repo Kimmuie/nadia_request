@@ -29,7 +29,7 @@ let proposalFound = false;
 // ------------------------------------------------------------
 window.setTimeout(() => {
   nadiaTitle.classList.add("show");
-}, CONFIG.packageFallMs + 150);
+}, CONFIG.packageFallMs + 400);
 
 packageButton.addEventListener("click", openPackage);
 
@@ -47,7 +47,7 @@ function openPackage() {
   window.setTimeout(() => {
     packageFlash.classList.add("go");
     sceneTwo.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 1450);
+  }, 1750);
 
   window.setTimeout(() => {
     packageFlash.classList.remove("go");
