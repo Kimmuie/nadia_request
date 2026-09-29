@@ -13,6 +13,7 @@ const nadiaTitle = document.getElementById("nadia-title");
 const packageFlash = document.getElementById("package-flash");
 const sceneTwo = document.getElementById("scene-two");
 const darkness = document.getElementById("darkness");
+const holdThisImage = document.getElementById("hold-this-image");
 const candle = document.getElementById("candle");
 const candleSection = document.getElementById("candle-section");
 const proposalMessage = document.getElementById("proposal-message");
@@ -63,9 +64,9 @@ function openPackage() {
 // otherwise it would float over scene one and the story.
 new IntersectionObserver(
   ([entry]) => {
-    candle.classList.toggle("visible", entry.intersectionRatio >= 0.95);
+    candle.classList.toggle("visible", entry.intersectionRatio >= 0.99);
   },
-  { threshold: [0, 0.95, 1] }
+  { threshold: [0, 0.8, 1] }
 ).observe(candleSection);
 
 function setSpotlight(x, y) {

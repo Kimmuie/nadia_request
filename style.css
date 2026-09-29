@@ -361,9 +361,9 @@ button {
   width: min(260px, 70vw);
   max-height: 110px;
   object-fit: contain;
-  margin: 8px auto 12px;
   transform: rotate(-2deg);
   filter: drop-shadow(2px 2px 0 rgba(0,0,0,.15));
+  z-index: 1;
 }
 
 .package-flash {
@@ -392,7 +392,7 @@ button {
 
 .scene-two {
   min-height: 2100px;
-  padding: 28px 18px 160px;
+  padding: 28px 18px 5px;
   background-color: transparent;
   background-attachment: fixed;
 }
@@ -505,28 +505,26 @@ button {
 
 .candle-section {
   position: relative;
-  z-index: 2;
+  z-index: 100;
   min-height: 850px;
   max-width: 850px;
   margin: 0 auto;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   place-items: center;
 }
 
 .candle-copy {
   text-align: center;
-  margin-top: 30px;
+  height: fit-content;
+  transition: opacity .4s ease;
 }
+
 
 .small-note {
   font-size: 13px;
 }
 
-.candle-copy h2 {
-  margin: 8px 0;
-  font: 700 clamp(38px, 8vw, 70px)/1 Georgia, serif;
-  transform: rotate(-2deg);
-}
 
 .candle-copy p {
   margin: 0;
@@ -539,23 +537,25 @@ button {
   height: 0;
 }
 
+
+
 .candle {
   position: fixed;
   left: 50%;
   top: 80%;
-  /* No fixed width/height: it sizes to candle.gif, so translate(-50%, -50%)
-     puts the candle's true center at the center of the screen. */
   width: fit-content;
   line-height: 0;
   transform: translate(-50%, -50%);
   cursor: grab;
   touch-action: none;
   user-select: none;
-  z-index: 70;
+  z-index: 110;
   opacity: 0;
   pointer-events: none;
   transition: opacity .4s ease;
 }
+
+
 
 .candle.visible {
   opacity: 1;
@@ -572,11 +572,12 @@ button {
   height: auto;
   user-select: none;
   pointer-events: none;
-  z-index: 70;
 }
 
-body.candle-active #candle {
-  z-index: 70;
+
+body.candle-active .candle-copy {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .drag-hint {
@@ -594,12 +595,10 @@ body.candle-active #candle {
 .darkness {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 90;
   pointer-events: none;
   opacity: 0;
   transition: opacity .55s ease;
-  /* Transparent circle around the candle = the page shows through normally.
-     Everything outside the circle stays dark. */
   background: radial-gradient(
     circle var(--light) at var(--spot-x, 50%) var(--spot-y, 50%),
     transparent 0%,
@@ -613,6 +612,10 @@ body.candle-active #candle {
   opacity: 1;
 }
 
+.hidden {
+  display: none;
+}
+
 .hidden-world {
   position: absolute;
   inset: 0;
@@ -621,37 +624,12 @@ body.candle-active #candle {
   font-family: "Charmonman", "Comic Sans MS", cursive;
 }
 
-.clue,
+
+
 .proposal-message {
   position: absolute;
-  opacity: 1;
+  opacity: .25;
   text-shadow: rgba(7,7,7,.96);
-}
-
-.clue {
-  font-size: 16px;
-  font-family: "Charmonman", "Comic Sans MS", cursive;
-}
-
-.clue-one {
-  left: 17%;
-  top: 28%;
-  transform: rotate(-8deg);
-}
-
-.clue-two {
-  right: 14%;
-  top: 57%;
-  transform: rotate(6deg);
-}
-
-.clue-three {
-  left: 20%;
-  bottom: 17%;
-  transform: rotate(2deg);
-}
-
-.proposal-message {
   left: 50%;
   top: 50%;
   width: min(90vw, 650px);
@@ -659,23 +637,17 @@ body.candle-active #candle {
   text-align: center;
   font-size: clamp(22px, 4vw, 38px);
   line-height: 1.35;
+  animation: flashFade 5s ease-in-out infinite;
 }
 
-.proposal-message span,
-.proposal-message strong,
-.proposal-message small {
-  display: block;
-}
+@keyframes flashFade {
+  0% {
+    opacity: .15;
+  }
 
-.proposal-message strong {
-  margin-top: 20px;
-  font-size: clamp(30px, 6vw, 60px);
-  font-weight: 700;
-}
-
-.proposal-message small {
-  margin-top: 15px;
-  font-size: 35px;
+  100% {
+    opacity: 0;
+  }
 }
 
 @media (max-width: 650px) {
