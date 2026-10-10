@@ -28,6 +28,7 @@ let proposalFound = false;
 // ------------------------------------------------------------
 window.setTimeout(() => {
   nadiaTitle.classList.add("show");
+  packageButton.classList.add("can-open");
 }, CONFIG.packageFallMs + 400);
 
 packageButton.addEventListener("click", openPackage);

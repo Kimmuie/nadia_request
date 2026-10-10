@@ -129,6 +129,11 @@ button {
   padding: 0;
   filter: drop-shadow(6px 7px 0 rgba(0,0,0,.12));
   transform-origin: 50% 90%;
+  pointer-events: none;
+}
+
+.package.can-open {
+  pointer-events: auto;
 }
 
 .package-visual {
@@ -498,7 +503,7 @@ button {
 
 .scribble-line {
   width: 90%;
-  border-top: 3px solid var(--ink);
+  border-top: 1px dashed var(--ink);
   transform: rotate(1deg);
   margin: 28px auto;
 }
@@ -631,7 +636,7 @@ body.candle-active .candle-copy {
   opacity: .25;
   text-shadow: rgba(7,7,7,.96);
   left: 50%;
-  top: 50%;
+  top: 20%;
   width: min(90vw, 650px);
   transform: translate(-50%, -50%) rotate(-1deg);
   text-align: center;
