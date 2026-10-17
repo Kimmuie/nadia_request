@@ -453,6 +453,7 @@ button {
 }
 
 .image-window {
+  min-height: 260px;
   transform: rotate(-1deg);
 }
 
@@ -474,7 +475,7 @@ button {
 }
 
 .card-three {
-  width: min(100%, 650px);
+  width: min(100%, 520px);
 }
 
 .tape {
@@ -641,17 +642,20 @@ body.candle-active .candle-copy {
   transform: translate(-50%, -50%) rotate(-1deg);
   text-align: center;
   font-size: clamp(22px, 4vw, 38px);
-  line-height: 1.35;
+  line-height: 2;
   animation: flashFade 5s ease-in-out infinite;
 }
 
 @keyframes flashFade {
   0% {
-    opacity: .15;
+    opacity: 0.3;
   }
 
+  50% {
+    opacity: 0.05;
+  }
   100% {
-    opacity: 0;
+    opacity: 0.3;
   }
 }
 

@@ -15,7 +15,7 @@
 
 ## 💌 Experience the Project
 
-**[Open Nadia Request →](https://github.com/Kimmuie/nadia_request.github.io/)**
+**[Open Nadia Request →](https://kimmuie.github.io/nadia_request/)**
 
 
 ## 📸 Screenshots
