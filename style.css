@@ -28,6 +28,7 @@ body {
   overflow-x: hidden;
 }
 
+
 button {
   font: inherit;
 }
@@ -437,7 +438,7 @@ button {
 }
 
 .story-card p {
-  font-size: clamp(16px, 2.2vw, 21px);
+  font-size: clamp(12px, 2.2vw, 21px);
   line-height: 1.7;
   margin: 22px 6px;
 }
@@ -641,7 +642,7 @@ body.candle-active .candle-copy {
   width: min(90vw, 650px);
   transform: translate(-50%, -50%) rotate(-1deg);
   text-align: center;
-  font-size: clamp(22px, 4vw, 38px);
+  font-size: clamp(14px, 4vw, 32px);
   line-height: 2;
   animation: flashFade 5s ease-in-out infinite;
 }
@@ -652,7 +653,7 @@ body.candle-active .candle-copy {
   }
 
   50% {
-    opacity: 0.05;
+    opacity: 0.1;
   }
   100% {
     opacity: 0.3;
